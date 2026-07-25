@@ -19,7 +19,6 @@ export default function Navbar({ dark = false }: NavbarProps) {
   const location = useLocation()
   const isHome = location.pathname === '/'
 
-  const textColor = dark ? 'text-white' : 'text-gray-900'
   const textMuted = dark ? 'text-gray-300' : 'text-gray-600'
   const textHover = dark ? 'hover:text-white' : 'hover:text-gray-900'
   const activeText = dark ? 'text-white font-semibold' : 'text-gray-900 font-semibold'
@@ -32,7 +31,7 @@ export default function Navbar({ dark = false }: NavbarProps) {
         isHome ? 'absolute top-0 left-0 right-0' : 'relative'
       }`}
     >
-      <Link to="/" className={`text-2xl font-semibold ${textColor}`}>
+      <Link to="/" className="text-2xl font-semibold text-gray-900">
         SkyElite
       </Link>
 
