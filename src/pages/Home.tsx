@@ -139,8 +139,8 @@ export default function Home() {
     const section = sectionRef.current
     if (!video || !section) return
 
-    const isMobile = window.innerWidth < 768
-    const SEEK_THRESHOLD = isMobile ? 0.12 : 0.04
+    const mq = window.matchMedia('(min-width: 768px)')
+    if (!mq.matches) return
 
     let duration = 0
     let sectionScrollHeight = 0
@@ -170,7 +170,7 @@ export default function Home() {
         if (sectionScrollHeight > 0 && duration > 0 && !video.seeking) {
           const progress = Math.min(window.scrollY / sectionScrollHeight, 1)
           const target = progress * duration
-          if (Math.abs(target - lastTarget) > SEEK_THRESHOLD) {
+          if (Math.abs(target - lastTarget) > 0.04) {
             video.currentTime = target
             lastTarget = target
           }
@@ -190,7 +190,58 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <section ref={sectionRef} className="relative h-[200vh] md:h-[300vh]">
+      {/* Mobile Hero - static with CSS animations */}
+      <section className="md:hidden relative h-screen overflow-hidden" style={{ backgroundColor: '#202A36' }}>
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 0%, transparent 40%)'
+          }} />
+        </div>
+
+        <div className="relative h-full flex flex-col">
+          <Navbar />
+
+          <div className="flex-1 flex items-center justify-center px-6">
+            <div className="text-center w-full">
+              <p className="text-sm font-semibold text-gray-400 tracking-wider mb-4 uppercase animate-fade-in-up delay-100">
+                Private Jets
+              </p>
+
+              <h1 className="mb-6">
+                <span className="block text-5xl font-normal text-gray-400 leading-none tracking-tighter animate-fade-in-up delay-200">
+                  Premium.
+                </span>
+                <span className="block text-5xl font-normal text-white leading-none tracking-tighter animate-fade-in-up delay-300" style={{ marginTop: '-8px' }}>
+                  Accessible.
+                </span>
+              </h1>
+
+              <p className="text-base text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-up delay-400">
+                Your dedication deserves recognition.
+              </p>
+
+              <div className="flex items-center justify-center gap-3 animate-fade-in-up delay-500">
+                <Link
+                  to="/fleet"
+                  className="px-5 py-2.5 rounded-full bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors"
+                >
+                  Discover
+                </Link>
+                <Link
+                  to="/book"
+                  className="px-5 py-2.5 rounded-full bg-white text-sm font-medium hover:bg-gray-100 transition-colors"
+                  style={{ color: '#202A36' }}
+                >
+                  Book Now
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Desktop Hero - video scroll animation */}
+      <section ref={sectionRef} className="hidden md:block relative h-[300vh]">
         <div className="sticky top-0 h-screen overflow-hidden">
           <video
             ref={videoRef}
