@@ -72,8 +72,8 @@ export default function Book() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="bg-gray-900">
-        <Navbar />
-        <div className="max-w-7xl mx-auto px-8 py-20 text-center">
+        <Navbar dark />
+        <div className="max-w-7xl mx-auto px-8 py-24 text-center">
           <p className="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
             Charter
           </p>

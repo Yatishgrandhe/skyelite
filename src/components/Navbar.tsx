@@ -10,10 +10,21 @@ const navLinks = [
   { label: 'Contact', path: '/contact' },
 ]
 
-export default function Navbar() {
+interface NavbarProps {
+  dark?: boolean
+}
+
+export default function Navbar({ dark = false }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
+
+  const textColor = dark ? 'text-white' : 'text-gray-900'
+  const textMuted = dark ? 'text-gray-300' : 'text-gray-600'
+  const textHover = dark ? 'hover:text-white' : 'hover:text-gray-900'
+  const activeText = dark ? 'text-white font-semibold' : 'text-gray-900 font-semibold'
+  const inactiveText = `${textMuted} ${textHover}`
+  const hamburgerColor = dark ? 'text-white' : 'text-gray-900'
 
   return (
     <nav
@@ -21,7 +32,7 @@ export default function Navbar() {
         isHome ? 'absolute top-0 left-0 right-0' : 'relative'
       }`}
     >
-      <Link to="/" className="text-2xl font-semibold text-gray-900">
+      <Link to="/" className={`text-2xl font-semibold ${textColor}`}>
         SkyElite
       </Link>
 
@@ -31,9 +42,7 @@ export default function Navbar() {
             key={link.path}
             to={link.path}
             className={`text-sm font-medium transition-colors ${
-              location.pathname === link.path
-                ? 'text-gray-900 font-semibold'
-                : 'text-gray-600 hover:text-gray-900'
+              location.pathname === link.path ? activeText : inactiveText
             }`}
           >
             {link.label}
@@ -44,21 +53,25 @@ export default function Navbar() {
       <div className="hidden md:block">
         <Link
           to="/book"
-          className="px-4 py-2 rounded-full text-white text-sm font-medium transition-colors"
-          style={{ backgroundColor: '#202A36' }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.backgroundColor = '#1a2229')
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.backgroundColor = '#202A36')
-          }
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+            dark
+              ? 'bg-white text-gray-900 hover:bg-gray-100'
+              : 'text-white'
+          }`}
+          style={dark ? undefined : { backgroundColor: '#202A36' }}
+          onMouseEnter={(e) => {
+            if (!dark) e.currentTarget.style.backgroundColor = '#1a2229'
+          }}
+          onMouseLeave={(e) => {
+            if (!dark) e.currentTarget.style.backgroundColor = '#202A36'
+          }}
         >
           Book Now
         </Link>
       </div>
 
       <button
-        className="md:hidden text-gray-900 transition-colors"
+        className={`md:hidden transition-colors ${hamburgerColor}`}
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         aria-label="Toggle menu"
       >
