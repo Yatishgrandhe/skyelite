@@ -73,16 +73,16 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-gray-900">
-        <Navbar dark />
+      <div className="bg-white">
+        <Navbar />
         <div className="max-w-7xl mx-auto px-8 py-24 text-center">
-          <p className="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-4">
+          <p className="text-sm font-semibold text-gray-500 tracking-wider uppercase mb-4">
             Contact
           </p>
-          <h1 className="text-5xl md:text-6xl font-normal text-white tracking-tight mb-6">
+          <h1 className="text-5xl md:text-6xl font-normal text-gray-900 tracking-tight mb-6">
             Let's talk
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
             Our aviation experts are available around the clock. Reach out
             anytime.
           </p>

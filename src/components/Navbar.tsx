@@ -10,20 +10,10 @@ const navLinks = [
   { label: 'Contact', path: '/contact' },
 ]
 
-interface NavbarProps {
-  dark?: boolean
-}
-
-export default function Navbar({ dark = false }: NavbarProps) {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
-
-  const textMuted = dark ? 'text-gray-300' : 'text-gray-600'
-  const textHover = dark ? 'hover:text-white' : 'hover:text-gray-900'
-  const activeText = dark ? 'text-white font-semibold' : 'text-gray-900 font-semibold'
-  const inactiveText = `${textMuted} ${textHover}`
-  const hamburgerColor = dark ? 'text-white' : 'text-gray-900'
 
   return (
     <nav
@@ -41,7 +31,9 @@ export default function Navbar({ dark = false }: NavbarProps) {
             key={link.path}
             to={link.path}
             className={`text-sm font-medium transition-colors ${
-              location.pathname === link.path ? activeText : inactiveText
+              location.pathname === link.path
+                ? 'text-gray-900 font-semibold'
+                : 'text-gray-600 hover:text-gray-900'
             }`}
           >
             {link.label}
@@ -52,25 +44,21 @@ export default function Navbar({ dark = false }: NavbarProps) {
       <div className="hidden md:block">
         <Link
           to="/book"
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            dark
-              ? 'bg-white text-gray-900 hover:bg-gray-100'
-              : 'text-white'
-          }`}
-          style={dark ? undefined : { backgroundColor: '#202A36' }}
-          onMouseEnter={(e) => {
-            if (!dark) e.currentTarget.style.backgroundColor = '#1a2229'
-          }}
-          onMouseLeave={(e) => {
-            if (!dark) e.currentTarget.style.backgroundColor = '#202A36'
-          }}
+          className="px-4 py-2 rounded-full text-white text-sm font-medium transition-colors"
+          style={{ backgroundColor: '#202A36' }}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.backgroundColor = '#1a2229')
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.backgroundColor = '#202A36')
+          }
         >
           Book Now
         </Link>
       </div>
 
       <button
-        className={`md:hidden transition-colors ${hamburgerColor}`}
+        className="md:hidden text-gray-900 transition-colors"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         aria-label="Toggle menu"
       >

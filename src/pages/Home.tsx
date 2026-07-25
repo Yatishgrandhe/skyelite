@@ -191,19 +191,13 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Mobile Hero - static with CSS animations */}
-      <section className="md:hidden relative h-screen overflow-hidden" style={{ backgroundColor: '#202A36' }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'radial-gradient(circle at 30% 50%, rgba(255,255,255,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 0%, transparent 40%)'
-          }} />
-        </div>
-
+      <section className="md:hidden relative h-screen overflow-hidden bg-white">
         <div className="relative h-full flex flex-col">
           <Navbar />
 
           <div className="flex-1 flex items-center justify-center px-6">
             <div className="text-center w-full">
-              <p className="text-sm font-semibold text-gray-400 tracking-wider mb-4 uppercase animate-fade-in-up delay-100">
+              <p className="text-sm font-semibold text-gray-500 tracking-wider mb-4 uppercase animate-fade-in-up delay-100">
                 Private Jets
               </p>
 
@@ -211,26 +205,29 @@ export default function Home() {
                 <span className="block text-5xl font-normal text-gray-400 leading-none tracking-tighter animate-fade-in-up delay-200">
                   Premium.
                 </span>
-                <span className="block text-5xl font-normal text-white leading-none tracking-tighter animate-fade-in-up delay-300" style={{ marginTop: '-8px' }}>
+                <span
+                  className="block text-5xl font-normal leading-none tracking-tighter animate-fade-in-up delay-300"
+                  style={{ color: '#202A36', marginTop: '-8px' }}
+                >
                   Accessible.
                 </span>
               </h1>
 
-              <p className="text-base text-gray-400 mb-8 max-w-md mx-auto animate-fade-in-up delay-400">
+              <p className="text-base text-gray-500 mb-8 max-w-md mx-auto animate-fade-in-up delay-400">
                 Your dedication deserves recognition.
               </p>
 
               <div className="flex items-center justify-center gap-3 animate-fade-in-up delay-500">
                 <Link
                   to="/fleet"
-                  className="px-5 py-2.5 rounded-full bg-white/10 text-white font-medium text-sm hover:bg-white/20 transition-colors"
+                  className="px-5 py-2.5 rounded-full border border-gray-300 text-gray-700 font-medium text-sm hover:bg-gray-50 transition-colors"
                 >
                   Discover
                 </Link>
                 <Link
                   to="/book"
-                  className="px-5 py-2.5 rounded-full bg-white text-sm font-medium hover:bg-gray-100 transition-colors"
-                  style={{ color: '#202A36' }}
+                  className="px-5 py-2.5 rounded-full text-white text-sm font-medium transition-colors"
+                  style={{ backgroundColor: '#202A36' }}
                 >
                   Book Now
                 </Link>
